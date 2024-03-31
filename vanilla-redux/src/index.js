@@ -1,13 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// Vanilla Redux
+const add = document.getElementById("add");
+const minus = document.getElementById("minus");
+const number = document.getElementById("number");
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+let count = 0;
 
-reportWebVitals();
+number.innerText = count;
+
+const updateCount = () => {
+  number.innerText = count;
+}
+
+
+const handleAdd = () => {
+  // console.log("add");
+  count += 1;
+  updateCount();
+}
+
+const handleMinus = () => {
+  // console.log("minus");
+  count -= 1;
+  updateCount();
+}
+
+add.addEventListener("click", handleAdd);
+minus.addEventListener("click", handleMinus);
