@@ -6,7 +6,7 @@ import { legacy_createStore } from "redux" // npm install redux
 
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
-const number = document.getElementById("number");
+const number = document.querySelector("span");
 
 // reducer = 나의 data를 modify(수정)하는 function
 // reducer가 return하는 것 = application에 있는 data
@@ -17,6 +17,9 @@ const number = document.getElementById("number");
 // 2. state를 어떻게 modify? action으로 수정하자
 // action은 plain한 obj여야함
 // reducer 외부에서 reducer와 소통할 수 있어야 함 -> action 보내기
+
+number.innerText = 0;
+
 const countModifier = (count = 0, action) => {
   console.log(count, action);
   if (action.type === "ADD") {
@@ -47,5 +50,27 @@ countStore.dispatch({type: "MINUS"});
 countStore.dispatch({type: "MINUS"});
 
 console.log(countStore.getState());
+
+const onChange = () => {
+  // console.log("store에 변화가 있었음");
+  // console.log(countStore.getState());
+  number.innerText = countStore.getState();
+};
+
+// 우리에게 store안에 있는 변화들을 알 수 있게 해줌
+countStore.subscribe(onChange);
+
+const handleAdd = () => {
+  countStore.dispatch({ type: "ADD" });
+};
+
+const handleMinus = () => {
+  countStore.dispatch({ type: "MINUS" });
+};
+
+add.addEventListener("click", handleAdd);
+minus.addEventListener("click", handleMinus);
+// add.addEventListener("click", () => countStore.dispatch({ type: "ADD" }));
+// minus.addEventListener("click", () => countStore.dispatch({ type: "MINUS" }));
 // create data's store -> set data's modifier 
 // -> send message to the store -> set message in action and check it
