@@ -26,15 +26,18 @@ const reducer = (state = [], action) => {
   // console.log(action);
   switch (action.type) {
     case ADD_TODO:
-      return [{text: action.text, id: action.id}, ...state];
+      const newToDoObj = { text: action.text, id: Date.now() };
+      return [newToDoObj, ...state];
     case DELETE_TODO:
-      return state.filter(toDo => toDo.id !== action.id);
+      const cleaned = state.filter((toDo) => toDo.id !== action.id);
+      return cleaned;
     default:
       return state;
   }
 };
 
 const store = legacy_createStore(reducer);
+
 store.subscribe(() => console.log(store.getState()));
 const dispatchAddToDo = text => {
   store.dispatch(addToDo(text));
@@ -62,7 +65,6 @@ const paintToDos = () => {
 };
 
 store.subscribe(paintToDos);
-
 
 // const createToDo = toDo => {
 //   const li = document.createElement("li");
