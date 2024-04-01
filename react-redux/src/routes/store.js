@@ -30,6 +30,7 @@ const reducer = (state = [], action) => {
 
 const store = legacy_createStore(reducer);
 
-store.subscribe();
-
 export default store;
+
+// 먼저 redux-state로부터 정보를 가지고 올 수 있어야 함 
+store.getState();

@@ -6,8 +6,8 @@ import App from "./components/App";
 // react-redux가 필요한 이유: store의 변동사항에 대해 subscribe하고 싶음
 // + store 변화하면 application의 모든 것이 re-render되면 좋겠음
 import { Provider } from "react-redux";
-import store from "./store";
-
+import store from "./routes/store";
+ 
 // ReactDOM.render(<App></App>, document.getElementById("root"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
